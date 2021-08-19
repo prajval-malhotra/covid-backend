@@ -1,5 +1,6 @@
 const resourcesRouter = require('express').Router()
 const Resources = require('../models/resource')
+// const Resource = require('./models/resource.js')
 
 resourcesRouter.get('/', (request, response) => {
   Resources.find({}).then(resources => {
@@ -19,19 +20,38 @@ resourcesRouter.get('/:id', (request, response, next) => {
     .catch(error => next(error))
 })
 
+// resourcesRouter.post('/', (request, response, next) => {
+//   const body = request.body
+
+//   const resource = new Resource({
+//     name: body.name,
+//     item: body.content,
+//     phone: body.phone,
+//     description: body.description,
+//     cost: body.cost,
+//     date: new Date()
+//   })
+  
+
+//   resource.save()
+//     .then(savedResource => {
+//       response.json(savedResource)
+//     })
+//     .catch(error => next(error))
+// })
+
 resourcesRouter.post('/', (request, response, next) => {
   const body = request.body
 
-  const resource = new Resource({
+  const temp = new Resources({
     name: body.name,
     item: body.content,
-    phone: body.phone,
     description: body.description,
     cost: body.cost,
-    date: new Date()
+    date: new Date(),
   })
 
-  resource.save()
+  temp.save()
     .then(savedResource => {
       response.json(savedResource)
     })
